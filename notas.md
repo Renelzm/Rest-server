@@ -56,3 +56,19 @@ res.status(401).json({msg:"Error"})
 8. Se ejecuta la función de mongoose (new instancia) con el body req
 9. Se encripta contraseña => variableContenedora de datos.password = const salt = bcryptjs.genSaltSync(); usuarioPost.password = bcryptjs.hashSync(password, salt);
 10. Se guarda en bd   await usuarioPost.save();
+
+
+## Heroku despliegues 
+
+### Subir a heroku
+1. Se crea el repo con el nombre
+2. heroku git remote
+3. git push heroku main
+4. Scrits "start "node app"
+
+
+
+### Variables de entorno
+* heroku config: set variable="text" => Establecer variable
+* heroku config: unset variable="text" => Quitar variable
+* EX MONGODB_CNN=mongodb+srv://user_node_rlm:ujeeSUrHVJcqqXnc@clusterrlm.hrt3k4v.mongodb.net/DBstore
