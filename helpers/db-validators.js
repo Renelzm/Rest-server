@@ -34,7 +34,5 @@ const esRolValido =  async (rol = "") => {
     throw new Error(`este id: ${id} no se encuentra`)
   }
  }
-  
-
 
   module.exports = {esRolValido, existeEmail, exiteUsuarioPorId}

@@ -20,7 +20,18 @@
 14. Crear en BD catalogo de usuarios y crear un helper que encuentre si existe bd-validator => check('rol').custom(esRolValido), (HELPER) 
 15. Quitar el password desde el modelo // UsuarioModelo.methods.toJSON = function () {  const {__v, password, ...usuario} = this.toObject();  return usuario} (MODELS)
 
+## LOGIN
+1. Instalar jsonwebtoken
+2. Cambiar path y rutas authpat and routes(va a routes) (SERVER)
+3. Crear el archivo de routes/authRuta => requerir router, check, controller para auth, validardatos(helper)=> Crear post login y revisar si es correo y si la contraseña tiene Datos (ROUTES)
+4. Crear archivo de controlador de login => requerir bcrypt, modelo de usuario y jwt (CONTROLLER)
+5. Se hace un query a la base de datos para ver si existe el correo, si esta activo el usuario y si el password hace match (CONTROLLER)
+6. Se crea un helper para crear un jwt, con el secret en la variable de entorno
 
+
+### PROTEJER RUTA
+1. Middleeare nuevo para validar jwt 
+2. 
 
 ## Peticiones http
 
@@ -42,6 +53,7 @@ res.status(401).json({msg:"Error"})
 * express-validator
 * bcryptjs
 * mongoose
+* jsonwebtoken
 
 
 ## Base de datos mongoose
