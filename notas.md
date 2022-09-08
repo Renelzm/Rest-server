@@ -26,7 +26,10 @@
 3. Crear el archivo de routes/authRuta => requerir router, check, controller para auth, validardatos(helper)=> Crear post login y revisar si es correo y si la contraseña tiene Datos (ROUTES)
 4. Crear archivo de controlador de login => requerir bcrypt, modelo de usuario y jwt (CONTROLLER)
 5. Se hace un query a la base de datos para ver si existe el correo, si esta activo el usuario y si el password hace match (CONTROLLER)
-6. Se crea un helper para crear un jwt, con el secret en la variable de entorno
+6. Se crea un helper para crear un jwt, con el secret en la variable de entorno (Helpers)
+7. Establecer middlewares para validart el rol del usuario y validar jwt const tieneRole = ( ...roles ) para crear arreglo y  if (!roles.includes(req.usuario.rol) para ver si existe
+8. 
+
 
 
 ### PROTEJER RUTA
@@ -84,3 +87,22 @@ res.status(401).json({msg:"Error"})
 * heroku config: set variable="text" => Establecer variable
 * heroku config: unset variable="text" => Quitar variable
 * EX MONGODB_CNN=mongodb+srv://user_node_rlm:ujeeSUrHVJcqqXnc@clusterrlm.hrt3k4v.mongodb.net/DBstore
+* ver logs : heroku logs -n 100
+
+
+## Google SignIn
+1. Consola de gcloud con un proyecto
+2. Ir a pantalla de consentimiento de credenciales y llenar los datos del proyecto
+3. En credenciales  permitimos las URI aotprizadas localhost y localhost:8080 y la página en la que etsa alojada
+4. En automático crea un clientId  se copia y se crean dos variables de entorno GOOGLE_CLIENT_ID= RESULT Y G_SECRET_ID = RESULT
+5. https://developers.google.com/identity/gsi/web/guides/display-button#html CÓDIGO
+6. https://developers.google.com/identity/gsi/web/guides/handle-credential-responses-js-functions DATA ATRIBUTE CALLBACK COPIAR
+7. PEGAR FUNVION DE scripts
+
+
+
+
+### CRUD GUIDE
+1. Crear ruta, controlador, y path en server
+2. En las rutas creamos el crud (get/post/put..etx¿c) router.get('/',  (req, res) => { res.json('get');});
+3. Crear modelo modelo

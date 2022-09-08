@@ -1,6 +1,6 @@
 const Role = require('../models/roleModel');
 const Usuario = require("../models/usuarioModel");
-
+const {Categoria, Producto} = require("../models/");
 
 /**-----------------------------------------------------------------------------------------------------------------------
  *?                                                 Validación de rol 
@@ -35,4 +35,20 @@ const esRolValido =  async (rol = "") => {
   }
  }
 
-  module.exports = {esRolValido, existeEmail, exiteUsuarioPorId}
+ const existeCategoriaPorId = async (id) => {
+  const encuentraId = await  Categoria.findById(id);
+  if (!encuentraId) {
+    throw new Error(` este id: ${id} no correspone a ninguna categoria`)
+  }
+
+ }
+
+ const existeProductoPorId = async (id) => {
+  const encuentraId = await  Producto.findById(id);
+  if (!encuentraId) {
+    throw new Error(` este id: ${id} no correspone a ningun producto`)
+  }
+
+ }
+
+  module.exports = {esRolValido, existeEmail, exiteUsuarioPorId,existeProductoPorId, existeCategoriaPorId}

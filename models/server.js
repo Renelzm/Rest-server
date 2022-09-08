@@ -1,18 +1,22 @@
 const express = require("express");
 const cors = require("cors");
-const { dbConnection } = require('../database/configDB')
-const morgan = require('morgan');
+const { dbConnection } = require("../database/configDB");
+const morgan = require("morgan");
 
 class Server {
-
   /**=======================================================================================================================
    * ?                                                   CONSTRUCTOR
    *=======================================================================================================================**/
   constructor() {
     this.app = express();
     this.port = process.env.PORT;
-    this.usuariosPath = '/api/usuarios';
-    this.authPath = '/api/auth';
+    this.paths = {
+      auth:          "/api/auth",
+      usuarios:      "/api/usuarios",
+      categorias:    "/api/categorias",
+      productos:     "/api/productos",
+      buscar:        "/api/buscar",
+    };
 
     // Conectar a base de datos
     this.conectarDB();
@@ -28,7 +32,7 @@ class Server {
     await dbConnection();
   }
 
-    /**=======================================================================================================================
+  /**=======================================================================================================================
    * ?                                              MIDDLEWARES FOR ALL APP
    *=======================================================================================================================**/
 
@@ -41,17 +45,20 @@ class Server {
     // Parseo y lectura de body
     this.app.use(express.json());
     // morgan para leer Peticiones
-    this.app.use(morgan('tiny'))
+    this.app.use(morgan("tiny"));
   }
 
-    /**=======================================================================================================================
+  /**=======================================================================================================================
    * ?                                                      ROUTES
    *=======================================================================================================================**/
-  routes() {    
-    this.app.use(this.authPath, require('../routes/authRuta'));
-    this.app.use(this.usuariosPath, require('../routes/usuariosRuta'));
+  routes() {
+    this.app.use(this.paths.auth, require("../routes/authRuta"));
+    this.app.use(this.paths.usuarios, require("../routes/usuariosRuta"));
+    this.app.use(this.paths.categorias, require("../routes/categoriasRuta"));
+    this.app.use(this.paths.productos, require("../routes/productosRuta"));
+    this.app.use(this.paths.buscar, require("../routes/buscar"));
   }
-/**=======================================================================================================================
+  /**=======================================================================================================================
    * ?                                                       PORT
    *=======================================================================================================================**/
   listen() {

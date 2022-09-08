@@ -33,7 +33,7 @@ const UsuarioModelo = mongoose.Schema({
 
 });
 
-//* PUT OUT PASSWORD FOR RESPONSE
+//* Quitar elementos que no necesito para las respuestas
 
 UsuarioModelo.methods.toJSON = function () {
     const {__v, password, _id, ...usuario} = this.toObject();

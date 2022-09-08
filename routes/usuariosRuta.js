@@ -1,7 +1,11 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
-
-const {validarJWT, validarCampos, esAdminRole, tieneRole} = require("../middlewares")
+const {
+  validarJWT,
+  validarCampos,
+  esAdminRole,
+  tieneRole,
+} = require("../middlewares");
 const {
   esRolValido,
   existeEmail,
@@ -19,15 +23,15 @@ const router = Router();
 
 /*======================================================= INICIO DE RUTAS USUARIO =======================================================*/
 
-
 /**-----------------------------------------------------------------------------------------------------------------------
  * *                                                 GET - POST - Ruta-Validación-Usuarios
  *-----------------------------------------------------------------------------------------------------------------------**/
 
 router.get("/", usuariosGet);
 
-router.get("/:id", usuarioGet);
-
+router.get("/:id",[
+  check("id", "No es in id válido").isMongoId(),
+], usuarioGet);
 
 /**----------------------------------------------------------------------------------------------------------------------
  **                                                 POST - Ruta-Validación-Usuarios
@@ -65,15 +69,18 @@ router.put(
 /**-----------------------------------------------------------------------------------------------------------------------
  **                                                 DELETE - Ruta-Validación-Usuarios
  *-----------------------------------------------------------------------------------------------------------------------**/
-router.delete("/:id",[
-  validarJWT,
-  tieneRole('ADMINISTRADOR_ROL', 'ADMINISTRADOR2_ROL'),
-  // esAdminRole,  
-  check("id", "No es in id válido").isMongoId(),
-  check("id").custom(exiteUsuarioPorId),
-  validarCampos,
-  
-], usuariosDelete);
+router.delete(
+  "/:id",
+  [
+    validarJWT,
+    tieneRole("ADMINISTRADOR_ROL", "ADMINISTRADOR2_ROL"),
+    // esAdminRole,
+    check("id", "No es in id válido").isMongoId(),
+    check("id").custom(exiteUsuarioPorId),
+    validarCampos,
+  ],
+  usuariosDelete
+);
 
 /**-----------------------------------------------------------------------------------------------------------------------
  **                                                 PATCH - Ruta-Validación-Usuarios

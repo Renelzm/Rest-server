@@ -1,7 +1,7 @@
 
 
 /**-----------------------------------------------------------------------------------------------------------------------
- * ?                                                 Index para juntar las importaciones de los middlewares
+ * ?                           Index para juntar las importaciones de los middlewares
  *-----------------------------------------------------------------------------------------------------------------------**/
 
 const validarJWT  = require("../middlewares/validar-jwt");
