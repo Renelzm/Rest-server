@@ -51,4 +51,16 @@ const esRolValido =  async (rol = "") => {
 
  }
 
-  module.exports = {esRolValido, existeEmail, exiteUsuarioPorId,existeProductoPorId, existeCategoriaPorId}
+   /**-----------------------------------------------------------------------------------------------------------------------
+ *?                                                Validar colecciones permitidas
+ *-----------------------------------------------------------------------------------------------------------------------**/
+
+ const coleccionesPermitidas =  ( coleccion = '', colecciones = []) => {
+      const incluida = colecciones.includes(coleccion);
+      if (!incluida) {
+        throw new Error(`La coleccion ${ coleccion } no es permitirda, ${ colecciones }`)
+      }
+      return true;
+ }
+
+  module.exports = {esRolValido, existeEmail, exiteUsuarioPorId,existeProductoPorId, existeCategoriaPorId, coleccionesPermitidas}

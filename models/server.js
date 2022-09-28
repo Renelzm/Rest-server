@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const { dbConnection } = require("../database/configDB");
 const morgan = require("morgan");
+const fileUpload = require("express-fileUpload");
+
 
 class Server {
   /**=======================================================================================================================
@@ -16,6 +18,7 @@ class Server {
       categorias:    "/api/categorias",
       productos:     "/api/productos",
       buscar:        "/api/buscar",
+      uploads:        "/api/uploads",
     };
 
     // Conectar a base de datos
@@ -46,6 +49,13 @@ class Server {
     this.app.use(express.json());
     // morgan para leer Peticiones
     this.app.use(morgan("tiny"));
+    //manejar la carga de archivos
+    this.app.use(fileUpload({
+      useTempFiles : true,
+      tempFileDir : '/tmp/',
+      // Este ultimo genera la carpeta en caso de especificart
+      createParentPath: true
+  }));
   }
 
   /**=======================================================================================================================
@@ -57,6 +67,7 @@ class Server {
     this.app.use(this.paths.categorias, require("../routes/categoriasRuta"));
     this.app.use(this.paths.productos, require("../routes/productosRuta"));
     this.app.use(this.paths.buscar, require("../routes/buscar"));
+    this.app.use(this.paths.uploads, require("../routes/uploadsRuta"));
   }
   /**=======================================================================================================================
    * ?                                                       PORT

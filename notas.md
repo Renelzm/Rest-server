@@ -57,6 +57,8 @@ res.status(401).json({msg:"Error"})
 * bcryptjs
 * mongoose
 * jsonwebtoken
+* uuid
+* express fileupload 
 
 
 ## Base de datos mongoose
@@ -106,3 +108,17 @@ res.status(401).json({msg:"Error"})
 1. Crear ruta, controlador, y path en server
 2. En las rutas creamos el crud (get/post/put..etx¿c) router.get('/',  (req, res) => { res.json('get');});
 3. Crear modelo modelo
+
+
+## HELPERS
+Rutas como check custom
+Son funciones que pueden ser asyncronas
+Tipos de expreciones para retornar resultados:
+throw new Error('El error')
+return new Promise((resolve, reject) => {} Ej.jwt
+ return reject()
+ resolve ()
+
+## middlewares
+(req, res, next)
+
